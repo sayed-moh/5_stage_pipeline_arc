@@ -1,1 +1,1 @@
-# 5_stage_pipeline_arc
+# 5_stage_pipeline_arch
