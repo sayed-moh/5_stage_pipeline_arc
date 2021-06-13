@@ -13,6 +13,10 @@ PORT( 		Reg1        	:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		ReadReg1_out    :    OUT std_logic_vector(2 DOWNTO 0);
        		PCADD_out   	:    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		ExcuteOutput    :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+		InPort_in       :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       		InPort_out      :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+		OutPort_in       :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       		OutPort_out      :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 
 		CU_InnerMUX1SEL :    IN std_logic_vector(1 DOWNTO 0);
 		CU_InnerMUX2SEL :    IN std_logic;
@@ -87,6 +91,7 @@ ARCHITECTURE a_excute_stage OF ExcuteStage IS
 	WriteReg1_out <= WriteReg1_in;
 	ReadReg1_out <= ReadReg1_in;
 	PCADD_out <= PCADD_in;
-	
+	InPort_out<=InPort_in;
+	OutPort_out<=OutPort_in;
 
 END ARCHITECTURE;

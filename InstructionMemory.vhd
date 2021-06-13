@@ -8,6 +8,7 @@ PORT   (
 	PC		:IN  std_logic_vector(19 DOWNTO 0);
 	clk		:IN std_logic;
 	Enable		:IN std_logic;
+	AddSel          :IN std_logic;
 	Data_IN		:IN  std_logic_vector(n-1 DOWNTO 0);
 	Instruction	:OUT std_logic_vector(n-1 DOWNTO 0)
 );
@@ -15,23 +16,28 @@ PORT   (
 END ENTITY;
 
 ARCHITECTURE a_INS_Memory of INS_Memory is 
-COMPONENT ram IS
+COMPONENT InstRam IS
 GENERIC(
 	  DataWidth    : INTEGER := 16;
 	  AddressWidth : INTEGER := 20;
 	  AddressSpace : INTEGER := 1048575 --(2^20-1)
 	  );
-PORT   (clk         : IN  std_logic;
+PORT   (
+	clk         : IN  std_logic;
 	we          : IN  std_logic;
+	addenable   : IN  std_logic;
 	address     : IN  std_logic_vector(AddressWidth-1 DOWNTO 0);
 	datain1     : IN  std_logic_vector(DataWidth-1 DOWNTO 0);
 	datain2     : IN  std_logic_vector(DataWidth-1 DOWNTO 0);
 	dataout1    : OUT std_logic_vector(DataWidth-1 DOWNTO 0);
-	dataout2    : OUT std_logic_vector(DataWidth-1 DOWNTO 0));
-END COMPONENT;
+	dataout2    : OUT std_logic_vector(DataWidth-1 DOWNTO 0)
+	);	
+END Component;
+signal twoWordInstruction: std_logic_vector(31 DOWNTO 0);
 begin
-InstructionRAM: Ram PORT MAP (clk,Enable,PC,Data_IN(31 DOWNTO 16),Data_IN(15 DOWNTO 0),Instruction(m-1 DOWNTO 0),Instruction(n-1 DOWNTO m));
+InstructionRAM: InstRam PORT MAP (clk,Enable,AddSel,PC,Data_IN(31 DOWNTO 16),Data_IN(15 DOWNTO 0),twoWordInstruction(n-1 DOWNTO m),twoWordInstruction(m-1 DOWNTO 0));
 
-
+Instruction(15 DOWNTO 0)<=  twoWordInstruction(m-1 DOWNTO 0);
+Instruction(31 DOWNTO 16)<= twoWordInstruction(n-1 DOWNTO m);
 
 end ARCHITECTURE;

@@ -17,12 +17,12 @@ ARCHITECTURE a_Branching OF Branching IS
 BEGIN
  --ConBranchEnable 10 carry
  --ConBranchEnable 01 negative
- --ConBranchEnable 00 zero
+ --ConBranchEnable 11 zero
 
 JmpEnable <= '1' when DirBranch='1' 
 		 or (ConBranchEnable="10" and CCR(2)='1')
 		 or (ConBranchEnable="01" and CCR(1)='1') 
-		 or (ConBranchEnable="00" and CCR(0)='1')
+		 or (ConBranchEnable="11" and CCR(0)='1')
 else '0';
 JmpAddr <= ReadData2;
 END a_Branching;
