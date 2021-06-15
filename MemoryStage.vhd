@@ -13,20 +13,15 @@ PORT   (clk             : IN  std_logic;
 	MemoryOutput    : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 	InPort_in       : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
        	InPort_out      : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	OutPort_in      : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       	OutPort_out     : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 	CU_WB_IN        : IN std_logic_vector(2 DOWNTO 0);
 	CU_WB_OUT       : OUT std_logic_vector(2 DOWNTO 0);
 	
-	Reg2_in         : IN  std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	Reg2_out        : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+	--Reg2_in         : IN  std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+	--Reg2_out        : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 	
 	Reg1            : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	
 	PCAdd           : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0); 
-
 	ResultALU       : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-
 	WriteReg1_in    : IN std_logic_vector(2 DOWNTO 0);
 	WriteReg1_out   : OUT std_logic_vector(2 DOWNTO 0)
 );  
@@ -74,10 +69,9 @@ ARCHITECTURE a_memorystage of memorystage is
 		MUX2: mux21 PORT MAP( Reg1, PCAdd ,CU_MEMDataSel,OUT_MUXData);
 		MEM: DataMemory PORT MAP ( OUT_MUXAddress(19 DOWNTO 0), OUT_MUXData, CU_MEMR, CU_MEMW, clk, MemoryOutput );
 		
-		Reg2_out <= Reg2_in;
+		--Reg2_out <= Reg2_in;
 		WriteReg1_out <= WriteReg1_in;
 		InPort_out <=InPort_in;
-		OutPort_out <=OutPort_in;
 		CU_WB_OUT<=CU_WB_IN;
 
 end ARCHITECTURE;
