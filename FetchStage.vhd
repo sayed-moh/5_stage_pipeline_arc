@@ -9,9 +9,6 @@ GENERIC(
 PORT (
 	InPort_in        :     IN std_logic_vector(31 DOWNTO 0);
        	InPort_out       :     OUT std_logic_vector(31 DOWNTO 0);
-	OutPort_in       :     IN std_logic_vector(31 DOWNTO 0);
-    	OutPort_out      :     OUT std_logic_vector(31 DOWNTO 0);
-
 	clk              :      IN std_logic;
  	WB		 :      IN std_logic_vector(AddressWidth-1 DOWNTO 0);
         RegDJMPAdd	 :      IN std_logic_vector(AddressWidth-1 DOWNTO 0);
@@ -20,8 +17,6 @@ PORT (
         PCALUSEL	 :	IN std_logic;
 	STALL		 :	IN std_logic;
 	Instruction	 :	OUT std_logic_vector(31 DOWNTO 0);
-	ENABLEINSTR	 :      IN std_logic;
-	DataIN    	 :      IN std_logic_vector(31 DOWNTO 0);
 	PCNext   	 :      OUT std_logic_vector(AddressWidth-1 DOWNTO 0)        
      );
 END  Fetch;
@@ -64,9 +59,7 @@ ARCHITECTURE a_Fetch OF Fetch IS
 	PORT   (
 	PC		:IN  std_logic_vector(19 DOWNTO 0);
 	clk		:IN std_logic;
-	Enable		:IN std_logic;
 	AddSel          :IN std_logic;
-	Data_IN		:IN  std_logic_vector(n-1 DOWNTO 0);
 	Instruction	:OUT std_logic_vector(n-1 DOWNTO 0)
 	);
    END COMPONENT;
@@ -83,10 +76,9 @@ ARCHITECTURE a_Fetch OF Fetch IS
 	MUX1:  mux41 GENERIC MAP(20) PORT MAP( RegDJMPAdd, RegCJMPAdd, PCALUOUT,WB , PCSEL, OUTMUX41 );
 	PC1: PC GENERIC MAP(20) PORT MAP(OUTMUX41,PCOUT,clk,STALL);
 	PCADD1: PCALU GENERIC MAP(20) PORT MAP(PCOUT,PCALUOUT,PCALUSEL);
-	INMEM: INS_Memory PORT MAP(PCOUT,clk,ENABLEINSTR,PCALUSEL,DataIN,INSS);
+	INMEM: INS_Memory PORT MAP(PCOUT,clk,PCALUSEL,INSS);
 --
 	PCNext<=PCALUOUT;
 	Instruction<=INSS;
 	InPort_out <=InPort_in;
-	OutPort_out <=OutPort_in;
 END ARCHITECTURE;

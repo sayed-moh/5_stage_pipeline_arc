@@ -11,10 +11,12 @@ PORT   (clk             : IN  std_logic;
 	CU_MEMAddressSel: IN  std_logic;
 	CU_SPOperation  : IN  std_logic_vector(1 DOWNTO 0);
 	MemoryOutput    : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	InPort_in    :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       	InPort_out   :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	OutPort_in    :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       	OutPort_out   :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+	InPort_in       : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       	InPort_out      : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+	OutPort_in      : IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       	OutPort_out     : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+	CU_WB_IN        : IN std_logic_vector(2 DOWNTO 0);
+	CU_WB_OUT       : OUT std_logic_vector(2 DOWNTO 0);
 	
 	Reg2_in         : IN  std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 	Reg2_out        : OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
@@ -76,5 +78,6 @@ ARCHITECTURE a_memorystage of memorystage is
 		WriteReg1_out <= WriteReg1_in;
 		InPort_out <=InPort_in;
 		OutPort_out <=OutPort_in;
+		CU_WB_OUT<=CU_WB_IN;
 
 end ARCHITECTURE;

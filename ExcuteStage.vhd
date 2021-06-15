@@ -8,15 +8,14 @@ PORT( 		Reg1        	:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		Imm        	:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		WriteReg1_in    :    IN std_logic_vector(2 DOWNTO 0);
 		ReadReg1_in     :    IN std_logic_vector(2 DOWNTO 0);
-		PCADD_in        :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+		PCADD_in        :    IN std_logic_vector(19 DOWNTO 0);
 		WriteReg1_out   :    OUT std_logic_vector(2 DOWNTO 0);
 		ReadReg1_out    :    OUT std_logic_vector(2 DOWNTO 0);
-       		PCADD_out   	:    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       		PCADD_out   	:    OUT std_logic_vector(19 DOWNTO 0);
 		ExcuteOutput    :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		InPort_in       :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
        		InPort_out      :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-		OutPort_in       :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       		OutPort_out      :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
+       		OutPort         :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 
 		CU_InnerMUX1SEL :    IN std_logic_vector(1 DOWNTO 0);
 		CU_InnerMUX2SEL :    IN std_logic;
@@ -24,6 +23,10 @@ PORT( 		Reg1        	:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		ALUOP           :    IN std_logic_vector(2 DOWNTO 0);
 		FU_SEL0         :    IN std_logic_vector(1 DOWNTO 0);
 		FU_SEL1         :    IN std_logic_vector(1 DOWNTO 0);
+		CU_MEM_IN       :    IN std_logic_vector(4 DOWNTO 0);
+		CU_MEM_OUT      :    OUT std_logic_vector(4 DOWNTO 0);
+		CU_WB_IN        :    IN std_logic_vector(2 DOWNTO 0);
+		CU_WB_OUT       :    OUT std_logic_vector(2 DOWNTO 0);
 		
 		ExcuteForwarding:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		MemoryForwarding:    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0)
@@ -92,6 +95,8 @@ ARCHITECTURE a_excute_stage OF ExcuteStage IS
 	ReadReg1_out <= ReadReg1_in;
 	PCADD_out <= PCADD_in;
 	InPort_out<=InPort_in;
-	OutPort_out<=OutPort_in;
+	CU_MEM_OUT<=CU_MEM_IN; 
+	CU_WB_OUT<= CU_WB_IN;    
+		
 
 END ARCHITECTURE;

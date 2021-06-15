@@ -17,11 +17,8 @@ PORT( 		instr       :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
 		PCADD_in    :    IN std_logic_vector(19 DOWNTO 0);
        		PCADD_out   :    OUT std_logic_vector(19 DOWNTO 0);
 		InPort_in   :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       		InPort_out  :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-		OutPort_in  :    IN std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-       		OutPort_out :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0);
-	
-		WD1S        :    IN std_logic  ); --el mfrood ttl8y
+       		InPort_out  :    OUT std_logic_vector(REG_WIDTH-1 DOWNTO 0)
+); 
 		
 END ENTITY;
 
@@ -56,6 +53,5 @@ ARCHITECTURE a_decode_stage OF decodStage IS
 
 	PCADD_out <= PCADD_in;
 	InPort_out <=InPort_in;
-	OutPort_out <=OutPort_in;
 
 END ARCHITECTURE;
